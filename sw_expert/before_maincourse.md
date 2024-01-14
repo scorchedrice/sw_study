@@ -8,3 +8,7 @@ def game():
         print('B')
 game()
 ```
+#### `input().split()`
+- `input()` : 뭘 입력할래
+- `.split()` : 입력한 것을 쪼개 무엇을 기준으로
+
