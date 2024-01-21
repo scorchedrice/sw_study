@@ -1,9 +1,6 @@
-alpha = input()
-list_alpha = []
-ord_alpha = []
-for i in range(0, len(alpha)):
-	list_alpha.append((alpha[i]))
-    ord_alpha.append(list_alpha[i])
-    
-ord_alpha = ord_alpha - [ord('A')-1]*len(list_alpha)
-print(ord_alpha)
+a = 3.2 - 3.1
+b = 1.2 - 1.1
+if a == b:
+    print('Same')
+else:
+    print('Difference')
