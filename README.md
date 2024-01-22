@@ -1,5 +1,6 @@
 # sw_study
-## 1. Before maincourse
+## 1. SSAFY
+- 24.01.02 ~
 
-## 2. Main course
-[24.01.15_python](https://github.com/woongveloper/sw_study/blob/3a7252a3b7626ddd4ad87ca9f6e85869f2b29ee2/python/python_240115.md)
+## 2. 알고리즘 학습 이상무! - 서울 2반 스터디
+- 24.01.24 ~
