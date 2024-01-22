@@ -79,3 +79,19 @@ for i in range(0, game_size[0]):
 
 print(max(card_min), 'this is 3-3 answer') # 각 행의 min 값 중 가장 큰 값 도출
 '''
+
+# 3-4 1이 될 때까지
+# ㄱ. N-1, ㄴ. N//K
+# ㄱ, ㄴ 과정 중 하나를 단계마다 선택, 이 과정을 통해 최단 시행으로 N=1 만들기
+'''
+N, K = list(map(int, input().split()))
+count = 0 # 초기 loop 회수 0으로 임의 설정
+while N != 1: # N = 1 까지 loop 
+    if N%K == 0:
+        N = N//K # N이 K의 배수라면 나누고 몫
+    else:
+        N = N -1 # N이 K의 배수가 아니라면 -1
+    count = count + 1
+
+print(count, 'this is 3-4 answer')
+'''
