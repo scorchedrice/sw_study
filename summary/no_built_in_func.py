@@ -74,4 +74,27 @@ def count_num(num_list, target_num):
 print(count_num(num_list, 8)) # 몇번 나오냐
 
 # 최빈수 구하기
+# list를 sort하고, 이를 같은 숫자끼리 group으로 만든 후 같은 수의 리스트를 하나의 인자로 하는 새로운 리스트를 제작
+# 새로운 리스트 각각의 길이들을 비교하여 최대가 무엇인지 구한다.
 num_list = [10, 8, 7, 2, 2, 4, 8, 8, 8, 9, 5, 5, 3]
+num_list.sort()
+
+def bin_list(num_list):
+    total_group = []
+    start_group = [num_list[0]]
+    for i in range(1,len(num_list)):
+        if num_list[i] == num_list[i-1]:
+            start_group = start_group + [num_list[i]]
+        else:
+            total_group = total_group + [start_group]
+            start_group = [num_list[i]]
+    max_value = len(total_group[0])
+    for j in range(0, len(total_group)):
+        if max_value < len(total_group[j]):
+            max_value = len(total_group[j])
+
+    for k in range(0, len(total_group)):
+        if max_value == len(total_group[k]):
+            return total_group[k][0]
+
+print(bin_list(num_list))
