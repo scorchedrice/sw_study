@@ -14,12 +14,59 @@ for i in range(0, N): # 행(N) 만큼 열(M) 크기의 리스트 입력해야 N 
 
 # 맵의 외곽은 항상 바다이며 시작 지점은 항상 육지이다.
 
-direct_info = [0, 1, 2, 3] 
-# 서로 시작하면 3, 2, 1, 0 순으로 방향을 바꾼다.
-# 마찬가지로 동으로 시작하면 1, 0, 3, 2 로 방향을 바꾼다.
-# 즉 index 가 하나씩 줄어든다고 보면 된다. (서로 시작하는 경우 3, 2, 1, 0으로 direct_info index가 바뀌고 동으로 시작하는 경우 1, 0, -1, -2로 direct_info index가 바뀐다.)
+A_move = [-1, 0, 1, 0]
+B_move = [0, 1, 0, -1]
 
-def find_dir_index(d): # direct_info에서 index를 추출
-    for index in range(0, len(direct_info)):
-        if direct_info[index] == d:
-            return index
+def change_dir(d): # 방향을 바꿀 때 사용할 함수 정의
+    current_dir = d - 1
+    if current_dir == -1:
+        current_dir = 3
+    return current_dir
+
+def max_move(): # 0의 개수를 세는 것으로 0의 개수 이상으로 이동할 순 없기에 이를 최대 이동값으로 정하고 후에 이만큼 loop
+    num_zero = 0
+    for i in range(0,len(total_map)):
+        for j in range(0,len(total_map[i])):
+            if total_map[i][j] == 0:
+                num_zero += 1
+    return num_zero
+
+# 게임 시작
+
+count = 0
+max_move = max_move()
+
+while count != max_move: # max move 이하인 경우 게속 loop
+    d = change_dir(d) # 현재 방향에서 방향 전환 1회
+    if total_map[A + A_move[d]][B + B_move[d]] == 1 or total_map[A + A_move[d]][B + B_move[d]] == 2: # 갈 수 없다면
+        d = change_dir(d) # 방향전환 2회
+        if total_map[A + A_move[d]][B + B_move[d]] == 1 or total_map[A + A_move[d]][B + B_move[d]] == 2: # 갈 수 없다면
+            d = change_dir(d) # 방향전환 3회
+            if total_map[A + A_move[d]][B + B_move[d]] == 1 or total_map[A + A_move[d]][B + B_move[d]] == 2: # 갈 수 없다면
+                d = change_dir(d) # 방향전환 4회 (원래방향)
+                if total_map[A + A_move[d]][B + B_move[d]] == 1 or total_map[A + A_move[d]][B + B_move[d]] == 2: # 방향을 한바퀴 돌렸지만 갈 수 없는 경우 .. 뒤로 한칸!
+                    A = A + A_move[d-2] # 바라보는 방향의 반대방향으로 이동, 하지만 바라보는 방향은 바뀌지 않음
+                    B = B + B_move[d-2]
+                    if total_map[A][B] == 1: # 뒤로 가는 좌표에 바다가 있다면 loop 종료
+                        break
+                elif total_map[A + A_move[d]][B + B_move[d]] == 0:
+                    A = A + A_move[d] # 해당 좌표로 이동
+                    B = B + B_move[d]
+                    count = count + 1 # 숫자 더하기 1
+                    total_map[A][B] = 2 # 한번 가본 곳은 2로 표시
+            elif total_map[A + A_move[d]][B + B_move[d]] == 0:
+                A = A + A_move[d]
+                B = B + B_move[d]
+                count = count + 1
+                total_map[A][B] = 2
+        elif total_map[A + A_move[d]][B + B_move[d]] == 0:
+            A = A + A_move[d]
+            B = B + B_move[d]
+            count = count + 1
+            total_map[A][B] = 2
+    elif total_map[A + A_move[d]][B + B_move[d]] == 0:
+        A = A + A_move[d]
+        B = B + B_move[d]
+        count = count + 1
+        total_map[A][B] = 2
+print(count)
