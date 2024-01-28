@@ -14,7 +14,7 @@ for i in range(0, N): # 행(N) 만큼 열(M) 크기의 리스트 입력해야 N 
 
 # 맵의 외곽은 항상 바다이며 시작 지점은 항상 육지이다.
 
-A_move = [-1, 0, 1, 0]
+A_move = [-1, 0, 1, 0] # 나아갈 방향에 따른 A, B의 변화량
 B_move = [0, 1, 0, -1]
 
 def change_dir(d): # 방향을 바꿀 때 사용할 함수 정의
@@ -23,7 +23,7 @@ def change_dir(d): # 방향을 바꿀 때 사용할 함수 정의
         current_dir = 3
     return current_dir
 
-def max_move(): # 0의 개수를 세는 것으로 0의 개수 이상으로 이동할 순 없기에 이를 최대 이동값으로 정하고 후에 이만큼 loop
+def max_move(): # total map의 0의 개수 이상으로 이동할 순 없기에 이를 최대 이동값으로 정하고 후에 이만큼 loop
     num_zero = 0
     for i in range(0,len(total_map)):
         for j in range(0,len(total_map[i])):
@@ -33,8 +33,8 @@ def max_move(): # 0의 개수를 세는 것으로 0의 개수 이상으로 이�
 
 # 게임 시작
 
-count = 0
-max_move = max_move()
+count = 0 # 이동 몇번 했는지 계산하기 위해
+max_move = max_move() # 이 게임에서 최대로 이동할 수 있는 횟수
 
 while count != max_move: # max move 이하인 경우 게속 loop
     d = change_dir(d) # 현재 방향에서 방향 전환 1회
