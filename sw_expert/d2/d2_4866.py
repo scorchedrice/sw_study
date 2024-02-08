@@ -34,8 +34,6 @@ def find_error(check_str):
     else:
         return 0
         
-
-
 T = int(input())
 
 for tc in range(1,T+1):
