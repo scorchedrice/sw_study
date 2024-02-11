@@ -7,3 +7,4 @@ for tc in range(1,11):
         ground_info[0] = ground_info[0] + 1
 
     print(f"#{tc} {max(ground_info) - min(ground_info)}")
+

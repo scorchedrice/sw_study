@@ -20,11 +20,14 @@ for tc in range(1,T+1):
             card_count[i] = card_count[i] -3
 
     for j in range(0,len(card_count)-2):
-        if card_count[j] >= 1 and card_count[j+1] >= 1 and card_count[j+2] >= 1:
-            run_cnt += 1
+        if card_count[j] ==2 and card_count[j+1] == 2 and card_count[j+2] == 2:
+            run_cnt += 2
+            break
+        elif card_count[j] >=1 and card_count[j+1] >= 1 and card_count[j+2] >= 1:
             card_count[j] -= 1
             card_count[j+1] -= 1
             card_count[j+2] -= 1
+            run_cnt += 1
 
     if triplet_cnt + run_cnt == 2:
         print(f"#{tc} Baby Gin")
