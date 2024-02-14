@@ -27,13 +27,12 @@ def return_result(matrix):
     return max(result)
 
 
-# T = int(input())
-# for tc in range(1,T+1):
+T = int(input())
+for tc in range(1,T+1):
 
-N = int(input())
-matrix = []
-for _ in range(N):
-    matrix += [list(map(int, input().split()))]
+    N = int(input())
+    matrix = []
+    for _ in range(N):
+        matrix += [list(map(int, input().split()))]
 
-print(matrix)
-print(return_result(matrix))
+    print(f"#{tc} {return_result(matrix)}")

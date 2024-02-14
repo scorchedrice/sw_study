@@ -1,22 +1,29 @@
-# 합이 t인 부분집합 찾기
-# Example3.
-def f(i,k,s,t):
-    if s == t:
-        for j in range(k):
-            if bit[j]:
-                print(A[j], end = ' ')
-        print()
-    elif i == k: # 모든 원소를 고려했으나, 값에 도달하지 못한경우
-        return
-    elif s>t:
-        return
-    else: # 결정이 끝나지 않았다면
-        bit[i] = 1
-        f(i+1,k,s+A[i],t)
-        bit[i] = 0
-        f(i+1,k,s,t)
+N, M = map(int,input().split())
 
-N = 10 # 원소의 개수
-A = [1,2,3,4,5,6,7,8,9,10]
-bit = [0]*N # bit[i]는 A[i]가 부분집합에 포함되냐를 의미함
-f(0,N,0,10)
+map_matrix = [[987654321] * (N+1) for _ in range(N+1)] # 정답지가 될 matrix 작성
+for i in range(1,N+1):
+    for j in range(1,N+1):
+        if i == j:
+            map_matrix[i][j] = 0
+# 도착지와 출발지가 같은 경우 이를 0으로 변경
+for _ in range(M):
+    from_a, to_b = map(int, input().split())
+    map_matrix[from_a][to_b] = 1
+    map_matrix[to_b][from_a] = 1
+
+X, K = map(int, input().split())
+# K가 우선 방문, 이후 X 방문
+
+for k in range(1,N+1):
+    for a in range(1,N+1):
+        for b in range(1,N+1):
+            map_matrix[a][b] = min(map_matrix[a][b], map_matrix[a][k] + map_matrix[k][b])
+
+result = map_matrix[1][K] + map_matrix[K][X]
+if result >= 987654321:
+    print('Floyd')
+    print('-1')
+else:
+    print('Floyd')
+    print(result)
+print(map_matrix)
