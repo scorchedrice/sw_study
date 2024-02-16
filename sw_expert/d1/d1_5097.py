@@ -8,5 +8,5 @@ for tc in range(1,T+1):
     for k in range(M):
         # M번 과정을 반복한다.
         num_list[k + N] = num_list[k]
-    print(num_list[-N])
+    print(f"#{tc} {num_list[-N]}")
 
