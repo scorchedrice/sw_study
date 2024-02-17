@@ -13,22 +13,23 @@ def can_i_change(i,j,stone):
         current_j = j
         coord_stack_i= [] # 내가 확인한 방향을 기록하기 위해
         coord_stack_j = []
-        while True:
+        while 0 <= current_i + di[dir] <= N-1 and 0<= current_j + dj[dir] <= N-1:
             current_i = current_i + di[dir] # 해당하는 방향으로 한칸 이동하고
             current_j = current_j + dj[dir]
-            if 0<= current_i <= N-1 and 0<= current_j <= N-1: # 이동한 좌표가 game_map Index 내부라면
-                if game_map[current_i][current_j] == another_stone: # 그 좌표가 내가 놓았던 돌의 색상이 아니라면
-                    coord_stack_i += [current_i]
-                    coord_stack_j += [current_j]
-        
-                elif game_map[current_i][current_j] == stone and coord_stack_i == []: # 내가 놓았던 돌 색상과 동일하고 my_stack이 비어있다면
-                    break
+            
+            if game_map[current_i][current_j] == another_stone: # 그 좌표가 내가 놓았던 돌의 색상이 아니라면
+                coord_stack_i += [current_i]
+                coord_stack_j += [current_j]
+    
+            elif game_map[current_i][current_j] == stone and coord_stack_i == []: # 내가 놓았던 돌 색상과 동일하고 my_stack이 비어있다면
+                break
                 
-                if game_map[current_i][current_j] == stone: # 그 좌표가 내가 놓았던 돌의 색상과 동일하다면
-                    for my_stack in range(len(coord_stack_i)):
-                        game_map[coord_stack_i[my_stack]][coord_stack_j[my_stack]] = stone # 내가 놓았던 돌로 뒤집는다.
-                    break
-            else: # 만족하지 않는다면
+            elif game_map[current_i][current_j] == stone: # 그 좌표가 내가 놓았던 돌의 색상과 동일하다면
+                for my_stack in range(len(coord_stack_i)):
+                    game_map[coord_stack_i[my_stack]][coord_stack_j[my_stack]] = stone # 내가 놓았던 돌로 뒤집는다.
+                break
+            
+            else:
                 break
     return
 

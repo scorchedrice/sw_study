@@ -39,13 +39,13 @@ def DFS(start_i, start_j, end_i, end_j):
                 current_j = stack_j.pop()
                 # 아니라면 (갈 곳이 없다면) 이전 위치로 돌아간다.
     
-# for testcase in range(1,11):
-# tc = int(input())
+for testcase in range(1,11):
+    tc = int(input())
 
-maze = []
-for k in range(16):
-    maze += [list(map(int,input()))]
+    maze = []
+    for k in range(16):
+        maze += [list(map(int,input()))]
 
-start_i, start_j = find_point(maze, 2)
-end_i, end_j = find_point(maze, 3)
-print(DFS(start_i, start_j, end_i, end_j))
+    start_i, start_j = find_point(maze, 2)
+    end_i, end_j = find_point(maze, 3)
+    print(f"#{tc} {DFS(start_i, start_j, end_i, end_j)}")

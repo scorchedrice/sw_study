@@ -21,21 +21,24 @@ def count_one(matrix):
             if matrix[i][j] == 1:
                 result += 1
     return result
-N, M = map(int,input().split())
-my_time_list = list(range(1,M+1))
-matrix = [[9]*(N+1)]
-for _ in range(N):
-    matrix += [[9] + list(map(int,input().split()))]
 
-for k in my_time_list:
-    if M%k == 0: # M이 k의 배수인경우
-        all_toggle(matrix)
-    else:
-        for i in range(1,N+1):
-            for j in range(1,N+1):
-                if (i+j)%k == 0:
-                    my_toggle(matrix,i,j)
+T = int(input())
+for tc in range(1,T+1):
+    N, M = map(int,input().split())
+    my_time_list = list(range(1,M+1))
+    matrix = [[9]*(N+1)]
+    for _ in range(N):
+        matrix += [[9] + list(map(int,input().split()))]
 
-print(count_one(matrix))
+    for k in my_time_list:
+        if M%k == 0: # M이 k의 배수인경우
+            all_toggle(matrix)
+        else:
+            for i in range(1,N+1):
+                for j in range(1,N+1):
+                    if (i+j)%k == 0:
+                        my_toggle(matrix,i,j)
+
+    print(f"#{tc} {count_one(matrix)}")
 
 

@@ -3,7 +3,7 @@
 
 # 가로선 : 0이상 i미만, i이상 N-1이하 범위로 구분한다.
 '''
-가로선의 범위 : 1~N-2
+가로선의 범위 : 1~N-1
 가로선이 3이라고 한다면 (0,1,2) | (3,4, ... N-1)
 '''
 # 세로선 : 0이상 i미만, i이상 N-1이하 범위로 구분한다.
@@ -52,4 +52,4 @@ for tc in range(1,T+1):
             check_list = [sector1, sector2, sector3, sector4]
             result_list += [max(check_list) - min(check_list)]
 
-    print(result_list)
+    print(f"#{tc} {min(result_list)}")

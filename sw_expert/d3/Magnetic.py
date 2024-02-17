@@ -41,7 +41,6 @@ def move_magnetic(table_matrix):
         remove_magnetic(table_matrix) # 모두 이동 시킨 후 사이드 제거 작업 진행
 
         if move_cnt == 0: # 변화를 준 이후 그게 직전 매트릭스와 차이가 없다면
-            print('break')
             return
 
 def cnt_break(table_matrix):
