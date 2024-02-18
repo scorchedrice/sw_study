@@ -1,28 +1,48 @@
-N, M = map(int,input().split())
+# 커리큘럼
+'''
+N개의 강의 (1번부터 N번까지)
+동시에 여러 강의를 들을 수 있다고 가정한다.
+'''
+from collections import deque
 
-map_matrix = [[987654321] * (N+1) for _ in range(N+1)] # 정답지가 될 matrix 작성
-for i in range(1,N+1):
-    for j in range(1,N+1):
-        if i == j:
-            map_matrix[i][j] = 0
-# 도착지와 출발지가 같은 경우 이를 0으로 변경
-for _ in range(M):
-    from_a, to_b = map(int, input().split())
-    map_matrix[from_a][to_b] = 1
-    map_matrix[to_b][from_a] = 1
-
-X, K = map(int, input().split())
-# K가 우선 방문, 이후 X 방문
+N = int(input())
+class_list = [[] for _ in range(N+1)]
+time_list = [0] * (N+1)
+indegree = [0] * (N+1)
 
 for k in range(1,N+1):
-    for a in range(1,N+1):
-        for b in range(1,N+1):
-            map_matrix[a][b] = min(map_matrix[a][b], map_matrix[a][k] + map_matrix[k][b])
+    data = list(map(int,input().split()))
+    time_list[k] += data[0]
+    for x in data[1:-1]:
+        indegree[x] += 1
+        class_list[x] += [k]
+# class_list에 들어야하는 수업의 번호, 그 수업이 어떤 과목의 선수과목인지 입력
+print(class_list)
+print(indegree)
+print(time_list)
+def topo_sort():
+    result = [0] * (N+1)
+    Q = deque()
 
-result = map_matrix[1][K] + map_matrix[K][X]
-if result >= 987654321:
-    print('Floyd')
-    print('-1')
-else:
-    print('Floyd')
-    print(result)
+    for i in range(1,N+1):
+        if indegree[i] == 0:
+            # 진입 차수가 0인경우
+            Q.append(i)
+            result[i] += time_list[i]
+        
+    while Q:
+        current = Q.popleft()
+        for j in class_list[current]:
+            result[j] += time_list[j] + result[current]
+            indegree[j] -= 1
+            if indegree[j] == 0:
+                Q.append(j)
+        
+    for i in range(1,N+1):
+        print(result[i])
+
+topo_sort()
+
+
+
+
