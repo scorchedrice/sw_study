@@ -16,5 +16,4 @@ for tc in range(1,T+1):
         else:
             just_type += 1
             now += 1
-    print(use_macro)
-    print(just_type)
+    print(f"#{tc} {use_macro+just_type}")

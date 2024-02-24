@@ -1,70 +1,50 @@
-'''
-색을 칠하고
-R, B의 외각의 길이를 구한다 (내부제외)
-이후 P의 외각 길이를 구해 더한다
-'''
-def count_color(i,j):
-    now_i = i
-    now_j = j
-    cnt_i1 = 1
-    cnt_i2 = 1
-    cnt_j = 1
-    while True:
-        if now_i >= 9 or now_j >= 9:
-            break
-        if paper[now_i+1][j] == 1 or paper[now_i+1][j] == 2:
-            cnt_i += 1
-            now_i += 1
-        else:
-            break
-    
-    while True:
-        if now_i >= 9 or now_j >= 9:
-            break
-        if paper[now_i][now_j+1] == 1 or paper[now_i][now_j] == 2:
-            cnt_i += 1
-            now_i += 1
-        else:
-            break
-    
-    while True:
-        if now_j >= 10 or now_i >= 10:
-            break
-        if paper[i][now_j+1] == 1 or paper[i][now_j+1] == 2:
-            cnt_j += 1
-            now_j += 1
-        else:
-            break
+def check_i(paper):
+    global cnt
+    for i in range(9):
+        for j in range(10):
+            if paper[i][j] != paper[i+1][j]:
+                if (paper[i][j] == 1 and paper[i+1][j] == 2) or (paper[i][j] == 2 and paper[i+1][j] == 1):
+                    cnt += 2
+                else:
+                    cnt += 1
+                
+def check_j(paper):
+    global cnt
+    for j in range(9):
+        for i in range(10):
+            if paper[i][j] != paper[i][j+1]:
+                if (paper[i][j] == 1 and paper[i][j+1] == 2) or (paper[i][j] == 2 and paper[i][j+1] == 1):
+                    cnt += 2
+                else:
+                    cnt += 1
 
-    for k in range(i,now_i+1):
-        for l in range(j, now_j+1):
-            paper[k][l] -= 2
+def check_outline(paper):
+    global cnt
+    for i in range(10):
+        if paper[0][i] != 0:
+            cnt += 1
+        if paper[9][i] != 0:
+            cnt += 1
+        if paper[i][0] != 0:
+            cnt += 1
+        if paper[i][9] != 0:
+            cnt += 1
 
-    return 2*(now_i + now_j)
+T = int(input())
+for tc in range(1,T+1):
+    paper = [[0 for _ in range(10)] for _ in range(10)]
+  
+    N = int(input())
+    for _ in range(N):
+        start_i, start_j, end_i, end_j, color = map(int,input().split())
+        for i in range(start_i, end_i + 1):
+            for j in range(start_j, end_j + 1):
+                paper[i][j] += color
+                if paper[i][j] == 3:
+                    paper[i][j] = 0
 
-
-# T = int(input())
-# for tc in range(1,T+1):
-paper = [[0 for _ in range(10)] for _ in range(10)]
-print(paper)
-painting = int(input())
-origin_len = []
-paint_color = []
-for _ in range(painting):
-    Si,Sj,Ei,Ej,color = map(int,input().split())
-    for i in range(Si,Ei+1):
-        for j in range(Sj,Ej+1):
-            paper[i][j] += color
-    origin_len +=[2*((Ei-Si+1)+(Ej-Sj+1))]
-    paint_color += [color]
-for k in range(10):
-    print(paper[k])
-
-total = 0
-for m in range(10):
-    for n in range(10):
-        if paper[m][n] == 1:
-            total += count_color(m,n)
-print(total)
-for k in range(10):
-    print(paper[k])
+    cnt = 0
+    check_i(paper)
+    check_j(paper)
+    check_outline(paper)
+    print(f"#{tc} {cnt}")
