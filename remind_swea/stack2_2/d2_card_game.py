@@ -1,35 +1,30 @@
 '''
-i부터 j까지의 학생
-group1 : i 이상 (i+j)//2 이하
-group2 : (i+j)//2 + 1 이상 j이하
+가위1, 바위2, 보3
+1,2 : b 
+1,3 : a
+2,1 : a
+2,3 : b
+3,1 : b
+3,2 : a
 '''
-def who_is_winner(a,b):
-    if card[a] == card[b]:
-        return a
-    elif card[a] == 1 and card[b] == 2:
-        return b
-    elif card[a] == 1 and card[b] == 3:
-        return a
-    elif card[a] == 2 and card[b] == 1:
-        return a
-    elif card[a] == 2 and card[b] == 3:
-        return b
-    elif card[a] == 3 and card[b] == 1:
-        return b
-    elif card[a] == 3 and card[b] == 2:
-        return a
 
-def backtrace(a,b):
-    if a == b:
+def winner(a,b):
+    game = [card[a],card[b]]
+    if card[a]==card[b] or game == [1,3] or game == [2,1] or game == [3,2]:
         return a
     else:
-        left = backtrace(a,(a+b)//2)
-        right = backtrace((a+b)//2+1,b)
-        return who_is_winner(left, right)
+        return b
+
+def backtrack(i,j):
+    if i == j:
+        return i
+    else:
+        left = backtrack(i,(i+j)//2)
+        right = backtrack((i+j)//2+1,j)
+        return winner(left,right)
 
 T = int(input())
 for tc in range(1,T+1):
-
     N = int(input())
     card = list(map(int,input().split()))
-    print(backtrace(0,N-1))
+    print(f"#{tc} {backtrack(0,N-1)+1}")

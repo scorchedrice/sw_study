@@ -1,16 +1,30 @@
-def cal_subset(arr,n):
-    subset_list = [] # 구한 부분집합을 담을 빈 리스트
-    for i in range(1<<len(arr)): # 부분집합을 추출할 리스트의 개수
-        mid_subset = [] # 부분집합을 담기 위한 중간단계 역할을 할 빈 리스트
-        for j in range(len(arr)):
+def dfs(n,lst):
+    if n>12:
+        if sum(lst) == K and len(lst) == N:
+            ans.append(lst)
+        return
+    dfs(n+1, lst+[n])
+    dfs(n+1, lst)
+    
+def subset_bit(arr):
+    result = []
+    for i in range(1<<12):
+        memory = []
+        for j in range(12):
             if i & (1<<j):
-                mid_subset += [arr[j]]
-        if len(mid_subset) == n and sum(mid_subset) == K:
-            subset_list += [mid_subset]
-    return subset_list
+                memory += [arr[j]]
+        if len(memory) == N and sum(memory) == K:
+            result += [memory]
+    return len(result)
 
-A = list(range(1,13)) # 1부터 12까지의 자연수로 이루어진 리스트
-T = int(input())
+T=int(input())
 for tc in range(1,T+1):
     N, K = map(int,input().split())
-    print(f"#{tc} {len(cal_subset(A,N))}")
+    # N은 원소의 수, K는 원소의 합
+    #ans = []
+    #dfs(1,[])
+    #print(f"#{tc} {len(ans)}")
+
+    print(f"#{tc} {subset_bit(list(range(1,13)))}")
+# 비트연산자를 활용한 함수를 이용한 경우
+
