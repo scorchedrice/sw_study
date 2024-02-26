@@ -1,0 +1,19 @@
+유형 : string
+1. 크로아티아 알파벳, 실버
+https://www.acmicpc.net/problem/2941
+
+2. 너의 평점은, 실버
+https://www.acmicpc.net/problem/25206
+
+유형 : 색칠하기와 유사
+3. 직사각형 네개의 합집합 면적 구하기, 실버
+https://www.acmicpc.net/problem/2669
+
+순열 부분 보충
+유형 : 백트래킹, 순열
+N과 M(1), N과 M(2)
+https://www.acmicpc.net/problem/15649
+https://www.acmicpc.net/problem/15650
+참고영상
+https://youtu.be/exwk905In0U?si=nvbdXIgJZt8IDTkn
+# 이 채널에 다른 N과M문제도 있음.
