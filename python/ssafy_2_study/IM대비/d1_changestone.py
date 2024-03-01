@@ -26,10 +26,10 @@ for tc in range(1,T+1):
                     change(move_1)
                     change(move_2)
                 else:
-                    break
+                    continue
             else:
                 break
-            print(*stone)
+            
     print(f"#{tc}", end = ' ')
     print(*stone)
             
