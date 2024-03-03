@@ -1,5 +1,3 @@
-# 못..해!
-
 '''
 원자들은 2차원 평면에서 이동하며, 두 원자가 충돌하는 경우 에너지를 방출하고 소멸된다.
 2차원 평면 (x,y)를 활용한다.
@@ -15,61 +13,52 @@
 x와 y좌표는 -1000이상 1000이하이다.
 상(0) 하(1) 좌(2) 우(3)
 '''
-'''
-시간은 중요하지 않으니, 충돌 가능성을 조사하고, 이 에너지들의 총합을 구하자.
-한 원자를 기준으로 하나씩 가면서, 상하좌우에 있는 것을 확인한다. (x좌표절대값 혹은 y좌표절대값 차 0인경우)
-더불어 그것들의 이동 방향을 확인한다.
-그곳까지 갔을 때 시간과, 그 때 해당 원자의 위치를 계산하고
-과연 충돌이 가능한지 판별한 후 에너지를 추가한다.
-'''
 # 이차원 좌표 경계를 -2000, 2000으로 두고 한칸씩 보는 것이 편리
-# 2000을 더해 양수로 보정해도 편리
-N = int(input())
-atoms = []
-atom_position = [[0 for _ in range(4001)] for _ in range(4001)]
-for _ in range(N):
-    # x,y,dir,E
-    x,y,dir,E = map(int,input().split())
-    x = 2*(x+1000)
-    y = 2*(y+1000)
-    atoms.append([x,y,dir,E])
-    atom_position[x][y] += 1
-# dir 0(y +), 1(y -), 2(x +), 3(x -)
-change = [(0,1),(0,-1),(1,0),(-1,0)]
-finished_atoms = []
-crash_atoms = set()
-total_E = 0
-while atoms:
-    for i in range(len(atoms)):
-        x,y,dir,E = atoms[i]
-        move_x = x + change[dir][0]
-        move_y = y + change[dir][1]
-        if move_x < 0 or move_x > 4000 or move_y < 0 or move_y > 4000:
-            finished_atoms.append(i)
-            continue
-        atom_position[x][y] -= 1
-        atom_position[move_x][move_y] += 1
-        atoms[i][0] = move_x
-        atoms[i][1] = move_y
-    if finished_atoms != []:
-        for i in range(len(finished_atoms)):
-            del_atom_num = finished_atoms.pop()
-            del_x, del_y = atoms[del_atom_num][0], atoms[del_atom_num][1]
-            atom_position[del_x][del_y] -= 1
-            atoms.pop(del_atom_num)
-    for i in atoms:
-        x,y = i[0], i[1]
-        if atom_position[x][y] > 1:
-            crash_atoms.add((x,y))
-    if crash_atoms:
-        for x,y in crash_atoms:
-            for i in range(len(atoms)-1,-1,-1):
-                x_p, y_p, e = atoms[i][0], atoms[i][1], atoms[i][3]
-                if x_p == x and y_p == y:
-                    atom_position[x_p][y_p] -= 1
-                    total_E += e
-                    atoms.pop(i)
-        crash_atoms.clear()
-print(total_E)
+# 문제에서 주어지는 평면은 x,y평면으로 혼동 주의
+# 상하좌우[(0,1),(0,-1),(-1,0),(1,0)]
+
+dir = [(0,1),(0,-1),(-1,0),(1,0)]
+T = int(input())
+for tc in range(1,T+1):
+    N = int(input())
+    atom_list = []
+    for _ in range(N):
+        atom_info = list(map(int,input().split()))
+        atom_info[0] *= 2
+        atom_info[1] *= 2
+        # 좌표를 두배로 본 것 적용
+        atom_list.append(atom_info)
+        # x좌표, y좌표, 방향, 가지고 있는 에너지
 
 
+    total_E = 0
+    while True:
+        if atom_list == []: # 모든 원자들이 제거되는 경우 반복 중단
+            break
+
+        for i in range(len(atom_list)):
+            dir_info = atom_list[i][2]
+            atom_list[i][0] = atom_list[i][0] + dir[dir_info][0]
+            atom_list[i][1] = atom_list[i][1] + dir[dir_info][1]
+        # 원자 이동시키는 과정 진행 후, 좌표가 겹치는 것이 있는 것을 확인한다.
+        visited = set()
+        del_atom = set()
+        for j in range(len(atom_list)):
+            cx = atom_list[j][0]
+            cy = atom_list[j][1]
+            if (cx, cy) in visited:
+                del_atom.add((cx,cy))
+            else:
+                visited.add((cx,cy))
+
+        for k in range(len(atom_list)-1, -1, -1):
+            # 거꾸로 이를 확인하면 에러를 방지할 수 있다.
+            cx = atom_list[k][0]
+            cy = atom_list[k][1]
+            if (cx, cy) in del_atom:
+                total_E += atom_list[k][3]
+                del atom_list[k]
+            elif cx > 2000 or cx < -2000 or cy > 2000 or cy < -2000:
+                del atom_list[k]
+        
+    print(f"#{tc} {total_E}")

@@ -1,59 +1,61 @@
-# 해당 문제에서 계산은 우선순위를 고려하지 않고 왼쪽에서 오른쪽으로 진행
-def dfs(n,lst):
-    if n == len(oper_card):
-        oper_all.append(lst)
+from collections import deque
+
+def append_oper(lst):
+    oper_lst = ['+', '-', '*', '/']
+    for i in range(4):
+        if lst[i] != 0:
+            for _ in range(lst[i]):
+                oper.append(oper_lst[i])
+
+def mix_oper(n,lst):
+    if n == len(oper):
+        oper_lst.append(lst)
         return
     prev = 0
-    for k in range(len(oper_card)):
-        if visited[k] == 0 and prev != oper_card[k]:
-            prev = oper_card[k]
-            visited[k] = 1
-            dfs(n+1,lst + [oper_card[k]])
-            visited[k] = 0
+    for i in range(N-1):
+        if visited[i] == 0 and prev != oper[i]:
+            prev = oper[i]
+            visited[i] = 1
+            mix_oper(n+1,lst+[oper[i]])
+            visited[i] = 0
 
-def my_cal(operator, a, b):
-    if operator == '+':
-        return a+b
-    elif operator == '-':
-        return a-b
-    elif operator == '*':
-        return a*b
-    else:
-        return int(a/b)
+def my_cal(oper,num_list):
+    result = num_list.popleft()
+    while True:
+        if num_list == deque():
+            break
+        OPER = oper.popleft()
+        if OPER == '+':
+            result = result + num_list.popleft()
+        elif OPER == '-':
+            result = result - num_list.popleft()
+        elif OPER == '*':
+            result = result * num_list.popleft()
+        elif OPER == '/':
+            result = int(result/num_list.popleft())
+    return result
 
 T = int(input())
 for tc in range(1,T+1):
     N = int(input())
-    oper_num  = list(map(int,input().split()))
-    oper_card = []
-    oper_card += ['+'] * oper_num[0]
-    oper_card += ['-'] * oper_num[1]
-    oper_card += ['*'] * oper_num[2]
-    oper_card += ['/'] * oper_num[3]
-    visited = [0] * len(oper_card)
-    oper_all = []
-    dfs(0,[])
-    # 어차피 중복되는 것 없이 모든 경우의 수를 oper_all에 받았으므로, popleft 대신 pop 사용해도 같은 결과
-    num_card = list(map(int,input().split()))
-    max_result = -987654321
-    min_result = 987654321
-    det_continue = True
-    for oper in oper_all:
-        prev = num_card[0]
-        for i in range(1,N):
-            prev = my_cal(oper[-i], prev, num_card[i])
-            if prev > 100000000 or prev < -100000000:
-                det_continue = False
-                break
-        if det_continue == True:
-            if max_result < prev:
-                max_result = prev
-            if min_result > prev:
-                min_result = prev
-        else:
-            det_continue = True
-            break
-    if min_result >= max_result:
-        print(f"#{tc} 0")
-    else:
-        print(f"#{tc} {max_result - min_result}")
+    oper = []
+    append_oper(list(map(int,input().split())))
+    visited = [0] * (N-1)
+    oper_lst = []
+    mix_oper(0,[])
+    num_list = deque(list(map(int,input().split())))
+    prev = deque()
+    for i in range(N):
+        prev.append(num_list[i])
+
+    max_cal = -987654321
+    min_cal = 987654321
+    for k in range(len(oper_lst)):
+        use_oper = deque(oper_lst[k])
+        after_cal = my_cal(use_oper,num_list)
+        if after_cal > max_cal:
+            max_cal = after_cal
+        if after_cal < min_cal:
+            min_cal = after_cal
+        num_list += prev
+    print(f"#{tc} {max_cal - min_cal}")

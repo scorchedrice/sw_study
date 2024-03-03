@@ -39,14 +39,13 @@ def change_home(matrix, check):
                         matrix[move_i][move_j] = 'X'
     
 
-# T = int(input())
-# for tc in range(1,T+1):
-N = int(input())
-matrix = []
-for _ in range(N):
-    matrix.append(list(input()))
-cnt = 0
-check = check_point(matrix)
-print(cnt)
-change_home(matrix, check)
-print(cnt)
+T = int(input())
+for tc in range(1,T+1):
+    N = int(input())
+    matrix = []
+    for _ in range(N):
+        matrix.append(list(input()))
+    cnt = 0
+    check = check_point(matrix)
+    change_home(matrix, check)
+    print(f"#{tc} {cnt}")

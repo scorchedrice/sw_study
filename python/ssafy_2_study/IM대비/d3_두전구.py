@@ -9,17 +9,15 @@ Y ... C~D
 '''
 
 T = int(input())
+result = []
 for tc in range(1,T+1):
     A,B,C,D = map(int,input().split())
     # A가 B보다 작고, C가 D보다 작은 것은 보장되어 있다.
-    matrix = [0] * (101)
-    for i in range(A,B+1):
-        matrix[i] += 1
-    cnt = 0
-    for j in range(C,D+1):
-        try:
-            if matrix[j] == 1:
-                cnt += 1
-        except:
-            break
-    print(cnt)
+    start = max(A,C)
+    end = min(B,D)
+    if start > end:
+        result.append(0)
+    else:
+        result.append(end-start)
+for tc in range(1,T+1):
+    print(f"#{tc} {result[tc-1]}")
