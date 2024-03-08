@@ -7,30 +7,10 @@
 따라서 극단적인 테스트케이스를 한번 입력해 볼 이유가 있는 것 같다.
 스케일이 작거나, 크거나 혹은 한가지로만 이뤄진 상황이라거나
 '''
-
 from collections import deque
 
-length, width, height = map(int,input().split())
-matrix = [[] * width for _ in range(height)]
-
-for z in range(height):
-    for y in range(width):
-        matrix[z].append(list(map(int,input().split())))
-
-Q = deque()
-unripe = 0
-ripe = 0
-for x in range(length):
-    for y in range(width):
-        for z in range(height):
-            if matrix[z][y][x] == 1:
-                Q.append((x,y,z))
-                ripe += 1
-            elif matrix[z][y][x] == 0:
-                unripe += 1
-
 def bfs():
-    dif = [(0,0,-1),(0,0,1),(0,-1,0),(0,1,0),(-1,0,0),(1,0,0)]
+    dif = [(0,0,-1),(0,0,1),(0,-1,0),(0,1,0),(-1,0,0),(1,0,0)] # 주변 토마토 확인 목적
     mx = -1
     now = Q.popleft()
     while True:
@@ -51,6 +31,25 @@ def bfs():
             return mx - 1
         else:
             now = Q.popleft()
+
+length, width, height = map(int,input().split())
+matrix = [[] * width for _ in range(height)]
+
+for z in range(height):
+    for y in range(width):
+        matrix[z].append(list(map(int,input().split())))
+
+Q = deque()
+unripe = 0
+ripe = 0
+for x in range(length):
+    for y in range(width):
+        for z in range(height):
+            if matrix[z][y][x] == 1:
+                Q.append((x,y,z))
+                ripe += 1
+            elif matrix[z][y][x] == 0:
+                unripe += 1
 
 if unripe == 0:
     print('0')

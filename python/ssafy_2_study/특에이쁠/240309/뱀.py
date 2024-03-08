@@ -19,12 +19,11 @@ Q == deque()가 종료조건이 아닌, 벽 충돌 및 몸 충돌을 종료 조�
 '''
 맨 위 맨 좌측을 1행 1열이라고 한 것을 보니, 인덱스를 주의해야한다.
 '''
-import sys
+from collections import deque
 # 효율적인 계산을 위한 Look-up table
 n_dir = [(0,1),(0,-1),(-1,0),(1,0)] # 현재 방향(우좌상하)
 c_dir = [((-1,0),(1,0)),((1,0),(-1,0)),((0,-1),(0,1)),((0,1),(0,-1))] # 바꾸는 방향 (좌회전, 우회전)
 
-from collections import deque
 def bfs():
     now_i = 1
     now_j = 1
