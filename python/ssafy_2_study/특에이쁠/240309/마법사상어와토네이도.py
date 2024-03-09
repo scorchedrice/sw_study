@@ -102,4 +102,5 @@ while True:
         break
     assign_sand(now_i,now_j,dir,arr[now_i][now_j]) # 모래 정보 실시간 반영
     dir = change_dir(now_i, now_j, dir) # 방향전환 여부 판단
+    
 print(out_sand)
