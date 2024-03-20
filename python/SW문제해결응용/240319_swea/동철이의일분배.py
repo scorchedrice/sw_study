@@ -9,7 +9,8 @@ def dfs(n,percent):
     if n == N:
         if percent > mx:
             mx = percent
-    if percent * 100**(N-n) < mx:
+        return
+    if percent * 100**(N-n) <= mx:
         return
     for i in range(N):
         if v[i] == 0:
