@@ -25,10 +25,10 @@ for tc in range(1,T+1):
     N, M = map(int,input().split())
     matrix = [[0] * (N+1) for _ in range(N+1)]
     # matrix 세팅
-    print(matrix)
+    # print(matrix)
     for _ in range(M):
         s,e,c = map(int,input().split())
         matrix[s][e] = c
         matrix[e][s] = c
     result = prim(0)
-    print(result)
+    print(f"#{tc} {result}")

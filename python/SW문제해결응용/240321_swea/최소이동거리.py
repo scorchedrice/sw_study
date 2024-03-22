@@ -23,7 +23,7 @@ def Dij():
             if pivot < dist[next_node]:
                 # 경유가 더 저렴하다면
                 dist[next_node] = pivot
-                heapq.heappush(Q, (next_node, next_d))
+                heapq.heappush(Q, (next_node, pivot))
 
 
 
