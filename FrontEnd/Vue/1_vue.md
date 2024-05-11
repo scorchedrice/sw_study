@@ -15,7 +15,7 @@
 # Vue 사용 방법
 1. Vue 설치 (CDN or npm)
 2. Vue를 불러오기
-```vue3
+```js
 <script>
   const {createApp}=Vue
   const app = createApp({})
