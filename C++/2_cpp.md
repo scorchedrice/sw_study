@@ -101,5 +101,33 @@ int * ptr1 = &num
 # 참조자와 함수
 - 포인터 변수를 매개변수로 하는 함수는 CallByValue 함수일까 CallByReference일까?
   - CallByValue!, 포인터 변수 또한 메모리 주소 값을 가지고 있다.
-
+## 굳이 CallByReference를 사용하는 이유는 무엇일까?
+- CallByReference를 통해 함수 외부에 선언된 변수에 접근하기 용이하기 때문이다!
+  - CallByValue의 경우 외부에 선언된 변수에 접근하기 쉽지 않음.
 ## 참조자를 활용한 CallByReference
+```cpp
+#include <iostream>
+
+using namespace std;
+
+// Reference Swap
+void SwapByRef(int &ref1, int &ref2)
+{
+    int temp = ref2;
+    ref2 = ref1;
+    ref1 = temp;
+}
+
+
+int main(void)
+{
+    int var1 = 10;
+    int var2 = 20;
+
+    cout<<"BeforeSwap-var1,var2:"<<var1<<","<<var2<<endl;
+    SwapByRef(var1, var2);
+    cout<<"AfterSwap-var1,var2:"<<var1<<","<<var2<<endl;
+    return 0;
+}
+
+```
