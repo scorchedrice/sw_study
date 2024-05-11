@@ -20,13 +20,40 @@
   // 기본 양식
   const {createApp}=Vue
   const app = createApp({
-  setup() {
-    return {
-      // return하고 싶은 값
-    }
+    setup() {
+      return {
+        // return하고 싶은 값
+      }
     }
   })
 </script>
 ```
+3. 작성 후 {{ return된 값 }}을 통해 렌더링
+  - JavaScript 사용 가능
 
+# Template Syntax
+- {{}} : 데이터 바인딩의 기본
+- v-html="rawHtml" : html출력
+- v-bind:id="linkedId" : html의 id 속성을 vue의 linkedId 속성과 동기화
+- JavaScript Expressions
+
+# Directive
+- 표현식 값이 변경될 때, DOM에 반응적으로 업데이트를 적용
+
+## v-bind
+```html
+<a v-bind:href="myUrl">Move to url</a>
+<p :[key]="value"><p>
+```
+- html의 속성값을 vue 상태의 속성값과 동기화
+- :으로 v-bind 생략 가능
+- []으로 감싸 key로 활용가능
+  - 단, 이때는 소문자로 작성해야 html이 인식하기에 주의
+## v-on
+- 이벤트 리스너 연결 및 수신
+```html
+<button @click="callBack()">Example</button>
+```
+- @로 생략 가능
+- prevent, stop, self등의 modifier 존재 (. 뒤에 이를 붙혀 활용)
 
