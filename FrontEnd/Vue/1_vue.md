@@ -17,8 +17,15 @@
 2. Vue를 불러오기
 ```js
 <script>
+  // 기본 양식
   const {createApp}=Vue
-  const app = createApp({})
+  const app = createApp({
+  setup() {
+    return {
+      // return하고 싶은 값
+    }
+    }
+  })
 </script>
 ```
 
