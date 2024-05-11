@@ -131,3 +131,22 @@ int main(void)
 }
 
 ```
+
+# const 참조자
+- 함수를 실행할 때, 참조자를 이용한 값 변경을 허용하지 않겠다!
+```cpp
+void HappFunc(const int &ref1) {...}
+```
+---------------------
+# malloc & free, new & delete
+- malloc, free : C언어에서 힙의 메모리 할당 및 소멸에 사용되는 함수
+	- 이를 C++에서 new, delete로 단점 개선
+- 객체 생성시 New, Delete를 적극 활용!
+# 라이브러리 호출
+- cstudio, algorithm, cmath ... 다양한 라이브러리 호출 가능
+- 학습을 통해 추가하자 이 부분은
+
+- 
+
+
+
