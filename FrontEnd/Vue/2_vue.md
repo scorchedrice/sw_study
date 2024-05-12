@@ -132,3 +132,75 @@ defineProps({
 3. 손자
 - js : defineProps ({ sendSomething: 데이터타입 }), html : {{ sendSomething }}
 
+#### 위 예시는 ref값을 전달하는 과정이 아니지만, ref값 전달도 크게 다르지 않음 (v-bind를 활용할 것)
+--------------------
+## $emit()
+- 자식 컴포넌트가 이벤트를 발생시켜 부모 컴포넌트로 데이터를 전달하는 역할의 메서드
+  - $는 Vue 인스턴스의 내부 변수를 가리킨다. (life cycle hooks, 인스턴스 메서드 등에 접근할 때 사용)
+---------------------
+# emit, props ... 예시로 학습하자.
+```html
+// Baby
+<template>
+    <div>
+        <h1>Baby</h1>
+        {{ myMsg }}
+        <button @click="$emit('someEvent')">someEvent emit</button>
+        <button @click="myDefineEmit">DefineEmit</button>
+        <button @click="myDefineEmit2">Send Args</button>
+    </div>
+</template>
+
+<script setup>
+defineProps({ myMsg:String })
+
+const emit = defineEmits(['someEvent', 'emitArgs'])
+
+const myDefineEmit = function () {
+    emit('someEvent')
+}
+const myDefineEmit2 = function () {
+    emit('emitArgs', 1,2,3)
+}
+</script>
+
+<style scoped>
+
+</style>
+```
+```html
+// Parent
+<template>
+    <div>
+        {{ myMsg }}
+        <Baby  
+            @some-event="someCallback"  :my-msg="myMsg" 
+            @emit-args="getNumbers"
+        />
+    </div>
+</template>
+
+<script setup>
+import Baby from '@/components/Baby.vue'
+
+defineProps({
+    myMsg:String
+})
+
+const someCallback = function () {
+    console.log('Baby의 emit 수신')
+}
+
+const getNumbers = function (...args) {
+    console.log(args)
+    console.log(`Baby가 보낸 추가 인자 ${args} 수신`)
+}
+</script>
+
+<style scoped>
+
+</style>
+```
+## emit의 Naming
+- 선언 및 발신 : camelCase
+- 수신 : kebab-case
