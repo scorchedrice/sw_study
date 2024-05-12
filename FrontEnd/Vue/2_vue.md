@@ -81,12 +81,54 @@
 const input = ref(null)
 // ref값과 변수명 일치할 것
 ```
+-----------------
+# props, emit
+- 부모 => 자식 : pass props
+- 자식 => 부모 : emit event
 
+## props 특징
+- 부모 속성이 업데이트 되면, 자식으로 전달되지만, 그 역은 불가능
+- 자식 컴포넌트 내부에서 props를 변경하려고 시도해서는 안되며, 불가능
+- 또한 부모 컴포넌트가 업데이트될 때마다 이를 사용하는 자식 컴포넌트의 props가 최신 값으로 업데이트 된다.
+  - => 부모 컴포넌트에서만 변경하고 이를 내려받는 자식 컴포넌트는 자연스럽게 갱신
+### 단방향인 이유
+- 데이터 흐름의 일관성 및 단순화
 
+### props 선언
+- 부모가 되는 component에 자식 component import
+```
+App.vue에 Parent.vue import
+Parent.vue에 ParentChild.vue import
+```
+- Parent에서 ParentChild.vue에 보낼 props를 작성하는 방법?
+```html
+<template>
+  <div>
+    <ParentChild my-msg="message" />
+    // Parent.vue에서 작성
+  </div>
+</template>
+```
+- Props 선언
+```js
+// 1. 문자열 배열을 사용한 선언
+defineProps({
+  myMsg: String
+})
+// ParentChild.vue에서 작성
+// html은 대소문자를 구별하지 못하기에, 대문자를 소문자로 바꾸고 앞에 - 를 붙히는 문법 사용 (부모 component에서 전달할 때)
+// 자식으로 전달 시 (kebab-case), 선언 및 템플릿 참조 (camelCase)
+```
+```html
+{{ myMsg }}
+```
 
-
-
-
-
-
+### 정리
+1. 부모
+- js : import 자식, html : <자식 send-something = "message" />
+2. 자식
+- js : defineProps ({ sendSomething: 데이터타입 }), html : {{ sendSomething }}
+  - 손자에게 이어서 전달하는 경우엔 html : <자식 :send-something = "sendSomething" /> ... v-bind필요!
+3. 손자
+- js : defineProps ({ sendSomething: 데이터타입 }), html : {{ sendSomething }}
 
