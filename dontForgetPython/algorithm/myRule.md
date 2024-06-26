@@ -1,7 +1,6 @@
+![image](https://github.com/woongveloper/sw_study/assets/156386797/1f7a8d51-2367-428f-a193-0f46a748d6d8)
 # python을 잊지 않기 위해
 - 갑자기 든 생각인데, 다른 공부한다고 python을 잊어버리는건 아닌가 생각을 하게 되었음. 그래서 시작한 dontForgetPython
-![image](https://github.com/woongveloper/sw_study/assets/156386797/1f7a8d51-2367-428f-a193-0f46a748d6d8)
-
 - 주 1,2회 알고리즘 문제 풀이 진행.
 - 당장 어려운 것을 풀 필요는 없다. 이미 A형은 취득했으니, 감각을 올리는 것을 목표로 부담이 되지 않는 선에서 진행한다. (백준 실버 6월, 이후 골드1 복귀)
 
