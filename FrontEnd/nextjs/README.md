@@ -1,3 +1,6 @@
+# Next + React Query로 SNS 서비스 만들기대시보드
+- https://www.inflearn.com/course/next-react-query-sns%EC%84%9C%EB%B9%84%EC%8A%A4/dashboard
+
 # Using App Router vs. Using Pages Router
 - 기존 pages router 의 단점 => app router으로 보안
     - 물론 완벽하진 않음. 실험적인 기능 많고, 버그 있고 ...
