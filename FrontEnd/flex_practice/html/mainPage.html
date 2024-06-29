@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MainPage</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: row;
+            height: 100dvh;
+            width: 100dvw;
+        }
+        .leftside {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: pink;
+        }
+        .Innerleftside {
+            background-color: brown;
+        }
+        .rightside {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: skyblue;
+        }
+        .InnerRightside {
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="leftside">
+            <div class="Innerleftside">
+                <h2>I'm LeftSide</h2>
+            </div>
+        </div>
+        <div class="rightside">
+            <div class="InnerRightside">
+                <h2>I'm RightSide</h2>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

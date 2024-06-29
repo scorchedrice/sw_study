@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: row;
+            width: 100dvw;
+            height: 500dvh;
+            /* 스크롤을 내려보기 위해 200dvh */
+        }
+        .leftWrapper {
+            flex-grow: 1;
+            /* 비율 맞추기 */
+            display: flex;
+            align-items: flex-end;
+            flex-direction: column;
+            /* flex 방향을 col로 주고, flex-end로 정렬 */
+            background-color: pink;
+        }
+        .rightWrapper {
+            flex-grow: 1;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            background-color: skyblue;
+        }
+
+        .left_section {
+            width: 275px;
+            height: 100dvh;
+            background-color: brown;
+        }
+        .right_section {
+            width: 990px;
+            display: flex;
+            justify-content: space-between;
+            background-color: aquamarine;
+        }
+
+        .left_fixed {
+            position: fixed;
+            width: inherit;
+            /* 부모의 width 그대로 */
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+        }
+        .left_fixed_top {
+            flex: 1;
+            background-color: coral;
+        }
+        .left_fixed_bot {
+            background-color: beige;
+        }
+
+        .right_section_main {
+            width: 600px;
+            height: 500dvh;
+            background-color: aqua;
+        }
+        
+        .right_section_sub {
+            width: 350px;
+            height: 100%;
+        }
+        .right_section_sub_fixed {
+            position: fixed;
+            width: inherit;
+            height: 50px;
+            background-color: bisque;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="leftWrapper">
+            <section class="left_section">
+                <div class="left_fixed">
+                    <h2 class="left_fixed_top">Fixed - Top</h2>
+                    <h2 class="left_fixed_bot">Fixed - Bot</h2>
+                </div>
+            </section>
+        </div>
+        <div class="rightWrapper">
+            <div class="right_section">
+                <main class="right_section_main">
+                    <h1>MainSection</h1>
+                </main>
+                <div class="right_section_sub">
+                    <h2 class="right_section_sub_fixed">
+                        SubSection - Fixed
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

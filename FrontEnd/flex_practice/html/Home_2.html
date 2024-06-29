@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home2</title>
+    <style>
+        .container {
+            display: flex;
+            height: 500dvh;
+            flex-direction: row;
+            justify-content: center;
+            background-color: skyblue;
+        }
+        .content {
+            display: flex;
+            width: 1265px;
+            height: inherit;
+        }
+
+        .leftside {
+            width: 265px;
+            /* flex-grow: 1; */
+
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            height: 100dvh;
+            background-color: brown;
+        }
+        .rightside {
+            display: flex;
+            /* flex-grow: 1; */
+            width: 990px;
+            height: inherit;
+            background-color: aqua;
+        }
+
+        .leftNav {
+            position: fixed;
+            width: inherit;
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+        }
+        .leftNav_top {
+            flex: 1;
+            background-color: green;
+        }
+        .leftNav_bot {
+            background-color: gray;
+        }
+
+        .rightMain {
+            background-color: white;
+            width: 600px;
+            height: inherit;
+        }
+        .rightSub {
+            background-color: green;
+            width: 350px;
+        }
+        .rightFixed {
+            position: fixed;
+            width: inherit;
+            background-color: bisque;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="content">
+            <div class="leftside">
+                <nav class="leftNav">
+                    <h2 class="leftNav_top">Nav-TOP</h2>
+                    <h2 class="leftNav_bot">Nav-BOT</h2>
+                </nav>
+            </div>
+            <div class="rightside">
+                <main class="rightMain">Main</main>
+                <div class="rightSub">
+                    <h2 class="rightFixed">
+                        Sub
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

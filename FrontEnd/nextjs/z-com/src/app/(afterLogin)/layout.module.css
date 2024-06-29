@@ -9,6 +9,7 @@
     align-items: flex-end;
     flex-direction: column;
     flex-grow: 1;
+    /* 좌우에 flex-grow 1을 주면, 중앙 정렬 가능 */
 }
 
 .leftSection {
@@ -19,6 +20,7 @@
 .leftSectionFixed {
     position: fixed;
     width: inherit;
+    /* inherit : 부모의 width 상속 */
     height: 100dvh;
     display: flex;
     flex-direction: column;
@@ -82,6 +84,7 @@
     width: 990px;
     display: flex;
     justify-content: space-between;
+    /* flex 내부 content를 최대한 멀리 배치 */
 }
 
 .main {
