@@ -1,0 +1,81 @@
+# 2504
+from copy import deepcopy
+
+def checkValid(l1, l2, prev, now):
+    global small
+    global large
+    global p
+    global sketch
+    global tmp
+    global ans
+    if l1 == 0 and now == ')':
+        return False
+    elif l2 == 0 and now == ']':
+        return False
+    elif prev == '[' and now == ')':
+        return False
+    elif prev == '(' and now == ']':
+        return False
+    else:
+        if now == '(':
+            if prev == ')' or prev == ']':
+                p = '('
+                small += 1
+
+                tmp *= 2
+
+                return '+2('
+            p = '('
+            small += 1
+
+            tmp *= 2
+
+            return '2('
+        elif now == ')':
+            p = ')'
+            small -= 1
+            if sketch[-1] == '(':
+                sketch = sketch[0:-1]
+                ans += tmp
+                tmp //= 2
+                return ''
+            tmp //= 2
+            return ')'
+        elif now == '[':
+            if prev == ')' or prev == ']':
+                p = '['
+                large += 1
+                tmp *= 3
+                return '+3('
+            p = '['
+            large += 1
+            tmp *= 3
+            return '3('
+        else:
+            p = ']'
+            large -= 1
+            if sketch[-1] == '(':
+                sketch = sketch[0:-1]
+                ans += tmp
+                tmp //=3
+                return ''
+            tmp //= 3
+            return ')'
+
+
+data = input()
+sketch = ''
+tmp = 1
+ans = 0
+small = 0
+large = 0
+p = ''
+for i in range(len(data)):
+    validValue = checkValid(small, large, p, data[i])
+    if validValue == False:
+        ans = 0
+        break
+    else:
+        sketch += validValue
+# print(sketch)
+print(ans)
